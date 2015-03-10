@@ -38,12 +38,15 @@ BLINKY_OBJS = main.o \
               printf.o \
               printf-retarget.o \
               system_LPC8xx.o \
-              gcc_startup_lpc8xx.o
+              gcc_startup_lpc8xx.o \
+              nrf24.o \
+              spi.o \
+              Protocol.o
 
 all: $(FILENAME).bin
 
 blinky.axf: $(FILENAME).ld $(BLINKY_OBJS)
-	@$(LD) -o $@ $(LDFLAGS) -T $(LINKERSCRIPT) $(BLINKY_OBJS) $(LIBGCC)
+	@$(LD) -o $@ $(LDFLAGS) -T $(LINKERSCRIPT) $(BLINKY_OBJS) "$(LIBGCC)"
 	-@echo ""
 	@$(SIZE) $(FILENAME).axf
 
